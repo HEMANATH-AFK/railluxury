@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* Using standard CSS variables to avoid IDE warnings while keeping Tailwind v4 power */
+:root {
+  --color-rail-blue: #0B3D91;
+  --color-rail-maroon: #800000;
+  --color-rail-gold: #D4AF37;
+  --color-rail-grey: #F5F7FA;
+  
+  --primary: var(--color-rail-blue);
+  --secondary: var(--color-rail-maroon);
+  --accent: var(--color-rail-gold);
+  --background: var(--color-rail-grey);
+}
+
+@theme {
+  --color-primary: #0B3D91;
+  --color-secondary: #800000;
+  --color-accent: #D4AF37;
+  --color-background: #F5F7FA;
+}
+
+body {
+  background-color: var(--color-background);
+  color: #111827;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+}
+
+/* Base styles without @apply to ensure maximum compatibility */
+h1 { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.025em; color: var(--primary); }
+h2 { font-size: 1.875rem; font-weight: 800; letter-spacing: -0.025em; color: var(--primary); }
+h3 { font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+
+/* Utility Classes */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.95); }
+
+.card-premium {
+  background-color: white;
+  border-radius: 1.5rem;
+  border: 1px solid #F3F4F6;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.card-premium:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.input-rail {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: white;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.75rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.input-rail:focus {
+  ring: 2px;
+  ring-color: var(--accent);
+  border-color: var(--accent);
+}
