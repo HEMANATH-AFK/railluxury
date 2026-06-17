@@ -518,6 +518,37 @@ const Home = () => {
         </div>
       </section>
 
+      {/* VIP Loyalty Banner Section */}
+      <section id="vip-club" className="relative py-20 px-4 md:px-8 lg:px-16 bg-gray-900 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative glass-panel rounded-[40px] p-8 md:p-16 overflow-hidden glow-border-gold shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-10">
+            {/* Ambient gold glow */}
+            <div className="absolute top-[-50%] right-[-20%] w-[400px] h-[400px] rounded-full bg-accent/10 blur-[100px] pointer-events-none" />
+            
+            <div className="space-y-6 max-w-2xl relative z-10 text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur w-fit">
+                <Star size={14} className="text-accent" />
+                <span className="text-[10px] font-bold tracking-widest text-accent uppercase font-mono">Invitation Only</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+                Unlock The <span className="text-gold-gradient">Elite Connoisseur</span> Club
+              </h2>
+              <p className="text-gray-300 text-sm md:text-base font-light leading-relaxed">
+                Gain access to secret routes, complimentary cabin upgrades, private aviation charters, and dedicated client support. Join 12,000+ elite travelers who refuse to compromise.
+              </p>
+            </div>
+
+            <div className="relative z-10 shrink-0 w-full lg:w-auto">
+              <button
+                onClick={() => navigate('/register')}
+                className="w-full lg:w-auto px-8 py-4 rounded-xl bg-accent text-gray-900 font-extrabold text-sm tracking-widest uppercase hover:bg-yellow-500 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-accent/20 cursor-pointer"
+              >
+                Request Membership
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Amenities Detail Modal */}
       <AnimatePresence>
         {selectedAmenity && (
