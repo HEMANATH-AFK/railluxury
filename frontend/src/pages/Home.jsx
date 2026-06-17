@@ -112,7 +112,7 @@ const Home = () => {
             </motion.div>
           </div>
           <div className="lg:col-span-5 w-full">
-            <form onSubmit={handleSearch} className="glass-panel p-6 rounded-3xl glow-border-gold shadow-2xl space-y-6">
+            <form id="search-desk" onSubmit={handleSearch} className="glass-panel p-6 rounded-3xl glow-border-gold shadow-2xl space-y-6">
               <div className="flex justify-between items-center border-b border-white/5 pb-4">
                 <span className="text-sm font-bold uppercase tracking-widest text-accent flex items-center gap-2">
                   <Compass size={16} className="animate-spin-slow" /> Bespoke Booking
@@ -322,7 +322,45 @@ const Home = () => {
 
           {/* Fleet Grid Container */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Cards slot */}
+            {/* VIP Train Masterpiece Card */}
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="glass-panel rounded-3xl overflow-hidden glow-border-gold flex flex-col group"
+            >
+              <div className="h-64 bg-gradient-to-br from-red-950/80 to-indigo-900/60 relative flex items-center justify-center p-8 overflow-hidden">
+                <div className="absolute top-4 left-4 bg-accent/20 border border-accent/30 text-accent px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase">
+                  Royal Rail
+                </div>
+                <Train size={80} className="text-accent/30 group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div className="p-8 space-y-6 flex-1 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-black text-white">The Maharaja Palace Express</h3>
+                  <p className="text-gray-400 text-sm font-light leading-relaxed">
+                    A moving palace featuring presidential suites, marble-finished en-suite bathrooms, fine dining carriages, and a panoramic observation lounge.
+                  </p>
+                  <ul className="grid grid-cols-2 gap-2 pt-2">
+                    {['Personal Butler Service', 'Gourmet Dining Cars', 'Panoramic Bar Car', 'En-suite Shower Cabin'].map((feat, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-xs text-gray-300">
+                        <Award size={12} className="text-accent" /> {feat}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Suite Reservation From</span>
+                    <span className="text-xl font-black text-gold-gradient">₹18,500 <span className="text-xs text-gray-400 font-light">/ pax</span></span>
+                  </div>
+                  <button 
+                    onClick={() => { setType('train'); document.getElementById('search-desk')?.scrollIntoView({ behavior: 'smooth' }) }}
+                    className="px-4 py-2 text-xs font-bold bg-white/5 border border-white/10 hover:border-accent/50 hover:bg-accent hover:text-gray-900 rounded-lg transition-all cursor-pointer"
+                  >
+                    Select Cabin
+                  </button>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
