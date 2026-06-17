@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Train, Plane, MapPin, Calendar, Search, ArrowRight, Shield, Clock, Map, Globe, Star,
@@ -639,6 +640,44 @@ const Home = () => {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="relative py-20 px-4 md:px-8 lg:px-16 bg-gray-950/40">
+        <div className="max-w-4xl mx-auto">
+          <div className="glass-panel rounded-3xl p-8 md:p-12 glow-border-gold flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-3 max-w-md text-left">
+              <span className="text-[10px] font-bold text-accent uppercase tracking-widest block font-mono flex items-center gap-1">
+                <Mail size={12} /> Elite Dispatch
+              </span>
+              <h3 className="text-2xl font-black text-white">Subscribe to Luxury Dispatch</h3>
+              <p className="text-gray-400 text-xs font-light leading-relaxed">
+                Receive secret pathways, luxury updates, and priority invitations directly in your VIP mailbox.
+              </p>
+            </div>
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                toast.success('Privilege Dispatch Confirmed!');
+                e.target.reset();
+              }}
+              className="flex w-full md:w-auto items-center bg-white/5 border border-white/10 rounded-xl p-1 focus-within:border-accent/40 transition-all gap-2"
+            >
+              <input
+                type="email"
+                placeholder="Enter email address"
+                required
+                className="bg-transparent text-white text-xs outline-none px-3 py-2 w-full md:w-60 placeholder-gray-500"
+              />
+              <button
+                type="submit"
+                className="bg-accent hover:bg-yellow-500 text-gray-900 font-extrabold px-6 py-2 rounded-lg text-xs uppercase tracking-widest transition-all cursor-pointer whitespace-nowrap active:scale-95"
+              >
+                Join List
+              </button>
+            </form>
           </div>
         </div>
       </section>
