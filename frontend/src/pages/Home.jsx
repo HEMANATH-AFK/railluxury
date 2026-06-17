@@ -549,6 +549,47 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <section className="relative py-24 px-4 md:px-8 lg:px-16 bg-gray-950/40">
+        <div className="max-w-7xl mx-auto space-y-16">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur w-fit mx-auto">
+              <User size={14} className="text-accent" />
+              <span className="text-[10px] font-bold tracking-widest text-accent uppercase">VIP Reviews</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+              Shared Luxury, <span className="text-gold-gradient">Global Appreciations</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { name: "Devon Lane", role: "CEO, NexaCorp", review: "The Maharaja Express presidential suite blew me away. Superb service, five-star culinary dinners, and GPS tracking meant I could plan my business calls effortlessly.", rating: 5 },
+              { name: "Eleanor Pena", role: "Founder, Bloom Tech", review: "Bespoke aviation booking was flawless. Within minutes my flight schedule was resolved and the terminal lounge was ready. Pure elite class.", rating: 5 },
+              { name: "Albert Flores", role: "Managing Director", review: "A truly magnificent experience. Travel details, gourmet snacks, butler care—everything is optimized. Highly recommended for executive travels.", rating: 5 }
+            ].map((item, idx) => (
+              <div key={idx} className="glass-panel p-8 rounded-3xl glow-border-gold space-y-6 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <div className="flex gap-1 text-accent">
+                    {Array.from({ length: item.rating }).map((_, i) => (
+                      <Star key={i} size={14} fill="currentColor" />
+                    ))}
+                  </div>
+                  <p className="text-gray-300 text-sm font-light italic leading-relaxed">
+                    "{item.review}"
+                  </p>
+                </div>
+                <div className="pt-6 border-t border-white/5">
+                  <h5 className="text-sm font-extrabold text-white">{item.name}</h5>
+                  <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">{item.role}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* Amenities Detail Modal */}
       <AnimatePresence>
         {selectedAmenity && (
