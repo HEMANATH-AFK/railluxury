@@ -553,12 +553,14 @@ const Home = () => {
             </div>
 
             <div className="relative z-10 shrink-0 w-full lg:w-auto">
-              <button
-                onClick={() => navigate('/register')}
-                className="w-full lg:w-auto px-8 py-4 rounded-xl bg-accent text-gray-900 font-extrabold text-sm tracking-widest uppercase hover:bg-yellow-500 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-accent/20 cursor-pointer"
-              >
-                Request Membership
-              </button>
+              <HoverMagnetic>
+                <button
+                  onClick={() => navigate('/register')}
+                  className="w-full lg:w-auto px-8 py-4 rounded-xl bg-accent text-gray-900 font-extrabold text-sm tracking-widest uppercase hover:bg-yellow-500 hover:scale-105 active:scale-95 transition-all shadow-lg shadow-accent/20 cursor-pointer"
+                >
+                  Request Membership
+                </button>
+              </HoverMagnetic>
             </div>
           </div>
         </div>
