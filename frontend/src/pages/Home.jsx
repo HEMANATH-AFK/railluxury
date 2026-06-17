@@ -211,6 +211,49 @@ const Home = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Date & Guests Row */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-accent uppercase tracking-widest block">Departure Date</label>
+                  <div className="relative flex items-center bg-white/5 border border-white/10 rounded-xl px-3 py-3 focus-within:border-accent/50 focus-within:bg-white/10 transition-all">
+                    <Calendar className="text-accent mr-2 shrink-0 cursor-pointer" size={16} />
+                    <input 
+                      type="date" 
+                      className="bg-transparent text-white font-medium outline-none w-full text-xs cursor-pointer select-none"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-accent uppercase tracking-widest block">Guests</label>
+                  <div className="relative flex items-center bg-white/5 border border-white/10 rounded-xl px-3 py-3 focus-within:border-accent/50 focus-within:bg-white/10 transition-all justify-between">
+                    <div className="flex items-center gap-2">
+                      <User className="text-accent shrink-0" size={16} />
+                      <span className="text-white text-xs font-medium">{guests} {guests === 1 ? 'Guest' : 'Guests'}</span>
+                    </div>
+                    <div className="flex gap-1">
+                      <button 
+                        type="button" 
+                        onClick={() => setGuests(prev => Math.max(1, prev - 1))}
+                        className="w-5 h-5 rounded bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 text-white font-black text-xs cursor-pointer active:scale-90 select-none"
+                      >
+                        -
+                      </button>
+                      <button 
+                        type="button" 
+                        onClick={() => setGuests(prev => Math.min(10, prev + 1))}
+                        className="w-5 h-5 rounded bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 text-white font-black text-xs cursor-pointer active:scale-90 select-none"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </div>
