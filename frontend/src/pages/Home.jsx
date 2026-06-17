@@ -111,10 +111,51 @@ const Home = () => {
             </motion.div>
           </div>
           <div className="lg:col-span-5 w-full">
-            {/* Search form slot */}
-            <div className="glass-panel p-6 rounded-3xl glow-border-gold shadow-2xl">
-              <p className="text-gray-400 text-xs uppercase tracking-widest text-center">Bespoke Travel Desk</p>
-            </div>
+            <form onSubmit={handleSearch} className="glass-panel p-6 rounded-3xl glow-border-gold shadow-2xl space-y-6">
+              <div className="flex justify-between items-center border-b border-white/5 pb-4">
+                <span className="text-sm font-bold uppercase tracking-widest text-accent flex items-center gap-2">
+                  <Compass size={16} className="animate-spin-slow" /> Bespoke Booking
+                </span>
+                <span className="text-[10px] bg-accent/15 text-accent border border-accent/20 px-2 py-0.5 rounded-full font-bold uppercase">
+                  VIP Mode
+                </span>
+              </div>
+
+              {/* Trip Type Tabs */}
+              <div className="grid grid-cols-4 gap-1 p-1 bg-white/5 border border-white/10 rounded-xl">
+                {[
+                  { id: 'train', label: 'Train', icon: Train },
+                  { id: 'flight', label: 'Flight', icon: Plane },
+                  { id: 'charter', label: 'Charter', icon: Compass },
+                  { id: 'cruise', label: 'Cruise', icon: Globe }
+                ].map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = type === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setType(tab.id)}
+                      className={`relative py-2.5 rounded-lg flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                        isActive 
+                          ? 'bg-accent text-gray-900 font-extrabold shadow-lg' 
+                          : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      <Icon size={16} />
+                      <span className="text-[10px] uppercase tracking-wider">{tab.label}</span>
+                      {isActive && (
+                        <motion.span 
+                          layoutId="activeTabOutline"
+                          className="absolute inset-0 rounded-lg border-2 border-accent pointer-events-none"
+                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </form>
           </div>
         </div>
       </section>
