@@ -301,6 +301,31 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Fleet Showcase Section */}
+      <section id="fleet-showcase" className="relative py-24 px-4 md:px-8 lg:px-16 bg-gray-950/40">
+        <div className="max-w-7xl mx-auto space-y-16">
+          
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur w-fit mx-auto">
+              <Compass size={14} className="text-accent" />
+              <span className="text-[10px] font-bold tracking-widest text-accent uppercase">The Masterpiece Fleets</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+              Bespoke Engineering, <span className="text-gold-gradient">Unparalleled Luxury</span>
+            </h2>
+            <p className="text-gray-400 text-sm md:text-base font-light max-w-2xl mx-auto leading-relaxed">
+              Every detail is tailored for the ultimate connoisseur. Choose from our curated catalog of ultra-luxury railways and private aviation models.
+            </p>
+          </div>
+
+          {/* Fleet Grid Container */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Cards slot */}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
