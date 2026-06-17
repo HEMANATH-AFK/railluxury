@@ -681,6 +681,28 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Secondary Navigation Footer */}
+      <footer className="relative border-t border-white/5 py-12 px-4 md:px-8 lg:px-16 bg-gray-950/20">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <Globe className="text-accent animate-spin-slow" size={24} />
+            <span className="text-lg font-black tracking-widest text-white">RAILLUXURY</span>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-6 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+            <button onClick={() => document.getElementById('search-desk')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-accent transition-colors cursor-pointer bg-transparent border-none">Booking Desk</button>
+            <button onClick={() => document.getElementById('fleet-showcase')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-accent transition-colors cursor-pointer bg-transparent border-none">Master Fleets</button>
+            <button onClick={() => document.getElementById('luxury-routes')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-accent transition-colors cursor-pointer bg-transparent border-none">Signature Routes</button>
+            <button onClick={() => document.getElementById('luxury-amenities')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-accent transition-colors cursor-pointer bg-transparent border-none">Privileges</button>
+            <button onClick={() => document.getElementById('vip-club')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-accent transition-colors cursor-pointer bg-transparent border-none">Elite Club</button>
+          </div>
+
+          <div className="text-[10px] text-gray-600 font-medium tracking-widest">
+            © {new Date().getFullYear()} RAILLUXURY. All rights reserved.
+          </div>
+        </div>
+      </footer>
       {/* Amenities Detail Modal */}
       <AnimatePresence>
         {selectedAmenity && (
