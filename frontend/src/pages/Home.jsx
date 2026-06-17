@@ -507,22 +507,26 @@ const Home = () => {
               { title: 'Personal Butler', desc: 'A dedicated concierge is assigned to your suite, offering round-the-clock tailored assistance.', icon: Clock },
               { title: 'Vanguard Lounges', desc: 'Gain access to premium champagne and cigar lounges at all major transit terminals.', icon: Map }
             ].map((amenity, idx) => (
-              <div key={idx} className="glass-panel p-8 rounded-3xl glow-border-gold space-y-6 hover:scale-[1.01] transition-transform">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
-                  <amenity.icon size={22} />
+              <HoverTilt key={idx} maxTilt={8} scale={1.01} perspective={1200} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <div className="glass-panel p-8 rounded-3xl glow-border-gold space-y-6 hover:scale-[1.01] transition-transform w-full h-full flex flex-col justify-between">
+                  <div className="space-y-6">
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+                      <amenity.icon size={22} />
+                    </div>
+                    <div className="space-y-2">
+                      <h4 className="text-xl font-bold text-white">{amenity.title}</h4>
+                      <p className="text-gray-400 text-sm font-light leading-relaxed">{amenity.desc}</p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedAmenity(amenity)}
+                    className="text-xs font-bold text-accent flex items-center gap-1 hover:gap-2 transition-all cursor-pointer bg-transparent border-none outline-none mt-4 w-fit"
+                  >
+                    View Details <ChevronRight size={14} />
+                  </button>
                 </div>
-                <div className="space-y-2">
-                  <h4 className="text-xl font-bold text-white">{amenity.title}</h4>
-                  <p className="text-gray-400 text-sm font-light leading-relaxed">{amenity.desc}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setSelectedAmenity(amenity)}
-                  className="text-xs font-bold text-accent flex items-center gap-1 hover:gap-2 transition-all cursor-pointer bg-transparent border-none outline-none mt-4"
-                >
-                  View Details <ChevronRight size={14} />
-                </button>
-              </div>
+              </HoverTilt>
             ))}
           </div>
         </div>
