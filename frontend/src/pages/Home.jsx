@@ -405,6 +405,32 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Signature Routes Section */}
+      <section id="luxury-routes" className="relative py-24 px-4 md:px-8 lg:px-16 bg-gray-900">
+        <div className="max-w-7xl mx-auto space-y-16">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/5 pb-8">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur w-fit">
+                <MapPinned size={14} className="text-accent animate-pulse" />
+                <span className="text-[10px] font-bold tracking-widest text-accent uppercase font-mono">Trending Signature Journeys</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+                Curated Travel <span className="text-gold-gradient">Masterpieces</span>
+              </h2>
+            </div>
+            <p className="text-gray-400 text-sm font-light max-w-md md:text-right">
+              Selected pathways designed to deliver scenic wonders alongside unparalleled hospitality and dining.
+            </p>
+          </div>
+
+          {/* Routes Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Routes Card list */}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
