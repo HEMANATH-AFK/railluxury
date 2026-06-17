@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Train, Plane, MapPin, Calendar, Search, ArrowRight, Shield, Clock, Map, Globe, Star,
-  Compass, Award, User, ChevronDown, HelpCircle, Mail, MapPinned, CreditCard, ChevronRight, Menu, X
+  Compass, Award, User, ChevronDown, HelpCircle, Mail, MapPinned, ChevronRight, X
 } from 'lucide-react';
 
 const Home = () => {
