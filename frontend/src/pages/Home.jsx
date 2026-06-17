@@ -155,6 +155,34 @@ const Home = () => {
                   );
                 })}
               </div>
+
+              {/* Departure Input */}
+              <div className="space-y-2">
+                <label className="text-[10px] font-black text-accent uppercase tracking-widest block">Departing From</label>
+                <div className="relative flex items-center bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus-within:border-accent/50 focus-within:bg-white/10 transition-all">
+                  <MapPin className="text-accent mr-3 shrink-0" size={18} />
+                  <input 
+                    type="text" 
+                    placeholder="Enter departure city" 
+                    className="bg-transparent text-white placeholder-gray-500 font-medium outline-none w-full text-sm"
+                    value={source}
+                    onChange={(e) => setSource(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="flex gap-2 flex-wrap">
+                  {['Delhi', 'Mumbai', 'Chennai'].map((city) => (
+                    <button
+                      key={city}
+                      type="button"
+                      onClick={() => setSource(city)}
+                      className="text-[10px] px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-accent/40 transition-all cursor-pointer"
+                    >
+                      {city}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </form>
           </div>
         </div>
