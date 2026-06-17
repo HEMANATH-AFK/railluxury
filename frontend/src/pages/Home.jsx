@@ -279,6 +279,7 @@ const Home = () => {
               </button>
             </form>
           </div>
+        </div>
 
           {/* Live Statistics Ticker */}
           <motion.div 
