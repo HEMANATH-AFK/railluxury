@@ -61,7 +61,54 @@ const Home = () => {
         {/* Hero Content Wrapper */}
         <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 flex flex-col justify-center text-left space-y-6">
-            <p className="text-gray-400 mt-2 text-sm">Hero section layout established.</p>
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur w-fit"
+            >
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+              <span className="text-xs font-bold tracking-widest text-accent uppercase">Railluxury Elite Escapes</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight"
+            >
+              Bespoke Voyages for the <br />
+              <span className="text-gold-gradient">Discerning Traveler</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-base sm:text-lg text-gray-300 max-w-xl font-light leading-relaxed"
+            >
+              Ditch the ordinary. Journey through breathtaking landscapes aboard private high-speed cabins, five-star heritage trains, and tailored aviation fleets.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex flex-wrap gap-4 pt-4"
+            >
+              <button 
+                onClick={() => document.getElementById('fleet-showcase')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-6 py-3.5 rounded-xl bg-accent text-gray-900 font-bold hover:bg-yellow-500 hover:scale-105 active:scale-95 transition-all flex items-center gap-2 cursor-pointer shadow-lg shadow-accent/20"
+              >
+                Explore Fleet <ArrowRight size={18} />
+              </button>
+              <button 
+                onClick={() => document.getElementById('vip-club')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-6 py-3.5 rounded-xl bg-white/5 border border-white/10 text-white font-bold hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
+              >
+                Join VIP Club
+              </button>
+            </motion.div>
           </div>
           <div className="lg:col-span-5 w-full">
             {/* Search form slot */}
