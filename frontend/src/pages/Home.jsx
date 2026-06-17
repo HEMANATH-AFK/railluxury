@@ -136,26 +136,27 @@ const Home = () => {
                   const Icon = tab.icon;
                   const isActive = type === tab.id;
                   return (
-                    <button
-                      key={tab.id}
-                      type="button"
-                      onClick={() => setType(tab.id)}
-                      className={`relative py-2.5 rounded-lg flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
-                        isActive 
-                          ? 'bg-accent text-gray-900 font-extrabold shadow-lg' 
-                          : 'text-gray-400 hover:text-white hover:bg-white/5'
-                      }`}
-                    >
-                      <Icon size={16} />
-                      <span className="text-[10px] uppercase tracking-wider">{tab.label}</span>
-                      {isActive && (
-                        <motion.span 
-                          layoutId="activeTabOutline"
-                          className="absolute inset-0 rounded-lg border-2 border-accent pointer-events-none"
-                          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                        />
-                      )}
-                    </button>
+                    <HoverMagnetic key={tab.id} style={{ width: '100%', display: 'flex' }}>
+                      <button
+                        type="button"
+                        onClick={() => setType(tab.id)}
+                        className={`relative py-2.5 rounded-lg flex flex-col items-center justify-center gap-1 transition-all cursor-pointer w-full ${
+                          isActive 
+                            ? 'bg-accent text-gray-900 font-extrabold shadow-lg' 
+                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        }`}
+                      >
+                        <Icon size={16} />
+                        <span className="text-[10px] uppercase tracking-wider">{tab.label}</span>
+                        {isActive && (
+                          <motion.span 
+                            layoutId="activeTabOutline"
+                            className="absolute inset-0 rounded-lg border-2 border-accent pointer-events-none"
+                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                          />
+                        )}
+                      </button>
+                    </HoverMagnetic>
                   );
                 })}
               </div>
