@@ -7,6 +7,8 @@ import {
   Compass, Award, User, ChevronDown, HelpCircle, Mail, MapPinned, ChevronRight, X
 } from 'lucide-react';
 
+import { HoverTilt, HoverMagnetic } from '@hemanath-afk/afk-motion';
+
 const Home = () => {
   const navigate = useNavigate();
   
