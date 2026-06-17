@@ -142,7 +142,7 @@ const MainLayout = ({ children }) => {
           </div>
           <div className="mt-12 pt-8 border-t border-gray-50 text-center text-xs text-gray-400 font-bold uppercase tracking-widest">
             © 2026 RailLuxury Systems. All Rights Reserved. <br />
-            DEVELOPED BY THAHSEEM, DINESH, ROHIT                  
+            DEVELOPED BY PSYCHOPATH                  
           </div>
         </div>
       </footer>
