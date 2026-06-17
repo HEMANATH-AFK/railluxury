@@ -59,7 +59,8 @@ const Home = () => {
         </div>
 
         {/* Hero Content Wrapper */}
-        <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="relative z-10 max-w-7xl w-full flex flex-col gap-16 md:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 flex flex-col justify-center text-left space-y-6">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -277,6 +278,27 @@ const Home = () => {
               </button>
             </form>
           </div>
+
+          {/* Live Statistics Ticker */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 divide-y lg:divide-y-0 lg:divide-x divide-white/10 text-center"
+          >
+            {[
+              { value: "48+", label: "Active Luxury Suites", sub: "Global Routes" },
+              { value: "99.8%", label: "Punctuality SLA", sub: "Guaranteed Comfort" },
+              { value: "12,500+", label: "Elite Club Members", sub: "Five-Star Reviews" },
+              { value: "0ms", label: "Telemetry Latency", sub: "Live GPS Sync" }
+            ].map((stat, idx) => (
+              <div key={idx} className="flex flex-col justify-center px-4 pt-4 lg:pt-0 first:pt-0">
+                <span className="text-2xl md:text-3xl font-black text-gold-gradient block">{stat.value}</span>
+                <span className="text-xs font-bold text-white uppercase tracking-wider mt-1">{stat.label}</span>
+                <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mt-0.5">{stat.sub}</span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
     </div>
