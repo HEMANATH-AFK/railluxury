@@ -20,8 +20,8 @@ const Home = () => {
   // Accordion State
   const [openFaq, setOpenFaq] = useState(null);
 
-  // Amenities Carousel State
-  const [activeAmenity, setActiveAmenity] = useState(0);
+  // Amenities Detail Modal State
+  const [selectedAmenity, setSelectedAmenity] = useState(null);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -505,12 +505,67 @@ const Home = () => {
                   <h4 className="text-xl font-bold text-white">{amenity.title}</h4>
                   <p className="text-gray-400 text-sm font-light leading-relaxed">{amenity.desc}</p>
                 </div>
-                {/* Interactivity slot */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedAmenity(amenity)}
+                  className="text-xs font-bold text-accent flex items-center gap-1 hover:gap-2 transition-all cursor-pointer bg-transparent border-none outline-none mt-4"
+                >
+                  View Details <ChevronRight size={14} />
+                </button>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Amenities Detail Modal */}
+      <AnimatePresence>
+        {selectedAmenity && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedAmenity(null)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              className="relative w-full max-w-lg glass-panel rounded-3xl p-8 space-y-6 glow-border-gold shadow-2xl bg-gray-900 z-10"
+            >
+              <button
+                onClick={() => setSelectedAmenity(null)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors cursor-pointer"
+              >
+                <X size={20} />
+              </button>
+              <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
+                {selectedAmenity.title === 'Michelin Dining' && <Shield size={28} />}
+                {selectedAmenity.title === 'Personal Butler' && <Clock size={28} />}
+                {selectedAmenity.title === 'Vanguard Lounges' && <Map size={28} />}
+              </div>
+              <div className="space-y-3">
+                <span className="text-[10px] text-accent uppercase tracking-widest block font-bold">Elite Privilege Detail</span>
+                <h3 className="text-3xl font-black text-white">{selectedAmenity.title}</h3>
+                <p className="text-gray-300 text-sm font-light leading-relaxed">
+                  {selectedAmenity.desc} Our premium concierge department handles all specific requests. Enjoy customized menus, private reservation slots, and priority boarding support.
+                </p>
+              </div>
+              <div className="pt-4 border-t border-white/5 flex gap-4">
+                <button
+                  type="button"
+                  onClick={() => setSelectedAmenity(null)}
+                  className="w-full py-3 rounded-xl bg-accent text-gray-900 font-bold text-xs uppercase tracking-widest hover:bg-yellow-500 cursor-pointer transition-all"
+                >
+                  Acknowledge Privilege
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
