@@ -442,42 +442,42 @@ const Home = () => {
               { from: 'Chennai', to: 'Bangalore', type: 'train', price: '₹8,500', duration: '4H 45M', rating: 4.8, bg: 'from-blue-950/40 to-indigo-950/20' },
               { from: 'Bangalore', to: 'Goa', type: 'flight', price: '₹18,000', duration: '1H 15M', rating: 4.9, bg: 'from-purple-950/40 to-pink-950/20' }
             ].map((route, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.02 }}
-                onClick={() => navigate(`/search?type=${route.type}&source=${route.from}&destination=${route.to}&date=${date}`)}
-                className={`glass-panel p-6 rounded-3xl glow-border-gold flex flex-col justify-between h-72 cursor-pointer relative overflow-hidden group bg-gradient-to-br ${route.bg}`}
-              >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-colors"></div>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-start">
-                    <span className="text-[10px] bg-white/5 border border-white/10 px-2.5 py-1 rounded-md text-gray-300 font-bold uppercase tracking-wider">
-                      {route.type === 'flight' ? 'VIP Aviation' : 'Royal Rail'}
-                    </span>
-                    <div className="flex items-center gap-1 text-accent text-xs font-bold">
-                      <Star size={12} fill="currentColor" /> {route.rating}
+              <HoverTilt key={idx} maxTilt={8} scale={1.01} perspective={1500} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                <div
+                  onClick={() => navigate(`/search?type=${route.type}&source=${route.from}&destination=${route.to}&date=${date}`)}
+                  className={`glass-panel p-6 rounded-3xl glow-border-gold flex flex-col justify-between h-72 cursor-pointer relative overflow-hidden group bg-gradient-to-br ${route.bg} w-full`}
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-colors"></div>
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-start">
+                      <span className="text-[10px] bg-white/5 border border-white/10 px-2.5 py-1 rounded-md text-gray-300 font-bold uppercase tracking-wider">
+                        {route.type === 'flight' ? 'VIP Aviation' : 'Royal Rail'}
+                      </span>
+                      <div className="flex items-center gap-1 text-accent text-xs font-bold">
+                        <Star size={12} fill="currentColor" /> {route.rating}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Route Path</span>
+                      <h4 className="text-xl font-bold text-white flex items-center gap-2">
+                        {route.from} <ArrowRight size={14} className="text-accent group-hover:translate-x-1 transition-transform" /> {route.to}
+                      </h4>
                     </div>
                   </div>
 
-                  <div className="space-y-1">
-                    <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Route Path</span>
-                    <h4 className="text-xl font-bold text-white flex items-center gap-2">
-                      {route.from} <ArrowRight size={14} className="text-accent group-hover:translate-x-1 transition-transform" /> {route.to}
-                    </h4>
+                  <div className="pt-6 border-t border-white/5 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Duration</span>
+                      <span className="text-xs text-gray-300 font-bold">{route.duration}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Suite Ticket</span>
+                      <span className="text-lg font-black text-gold-gradient">{route.price}</span>
+                    </div>
                   </div>
                 </div>
-
-                <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-                  <div>
-                    <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Duration</span>
-                    <span className="text-xs text-gray-300 font-bold">{route.duration}</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-[10px] text-gray-500 uppercase tracking-widest block font-bold">Suite Ticket</span>
-                    <span className="text-lg font-black text-gold-gradient">{route.price}</span>
-                  </div>
-                </div>
-              </motion.div>
+              </HoverTilt>
             ))}
           </div>
         </div>
