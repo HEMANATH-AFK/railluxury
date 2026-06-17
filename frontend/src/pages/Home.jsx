@@ -32,11 +32,45 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans">
-      <div className="text-center py-20">
-        <h1 className="text-2xl font-bold tracking-widest text-accent animate-pulse">RAILLUXURY</h1>
-        <p className="text-gray-400 mt-2 text-sm">State & dependencies initialized.</p>
-      </div>
+    <div className="min-h-screen bg-luxury-dark text-white font-sans overflow-x-hidden luxury-scrollbar">
+      {/* Hero Section Container */}
+      <section className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-20 px-4 md:px-8 lg:px-16 overflow-hidden">
+        {/* Animated Background Mesh */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              rotate: [0, 90, 0],
+              opacity: [0.3, 0.4, 0.3]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-900/30 to-purple-900/0 blur-[120px]"
+          />
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.1, 1],
+              rotate: [0, -90, 0],
+              opacity: [0.2, 0.3, 0.2]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-amber-500/10 to-red-900/0 blur-[100px]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        </div>
+
+        {/* Hero Content Wrapper */}
+        <div className="relative z-10 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-7 flex flex-col justify-center text-left space-y-6">
+            <p className="text-gray-400 mt-2 text-sm">Hero section layout established.</p>
+          </div>
+          <div className="lg:col-span-5 w-full">
+            {/* Search form slot */}
+            <div className="glass-panel p-6 rounded-3xl glow-border-gold shadow-2xl">
+              <p className="text-gray-400 text-xs uppercase tracking-widest text-center">Bespoke Travel Desk</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
