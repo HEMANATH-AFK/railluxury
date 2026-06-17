@@ -472,6 +472,45 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Exclusive Amenities Section */}
+      <section id="luxury-amenities" className="relative py-24 px-4 md:px-8 lg:px-16 bg-gray-950/40">
+        <div className="max-w-7xl mx-auto space-y-16">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur w-fit mx-auto">
+              <Award size={14} className="text-accent" />
+              <span className="text-[10px] font-bold tracking-widest text-accent uppercase">World-Class Standards</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+              Bespoke Hospitality, <span className="text-gold-gradient">Tailored To You</span>
+            </h2>
+            <p className="text-gray-400 text-sm md:text-base font-light max-w-2xl mx-auto leading-relaxed">
+              We go beyond transportation. Our curated luxury packages provide elite support and amenities at every step of your travel checklist.
+            </p>
+          </div>
+
+          {/* Grid list of amenities */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: 'Michelin Dining', desc: 'Savor gourmet dishes curated by world-class culinary artists, served in bespoke dining cabins.', icon: Shield },
+              { title: 'Personal Butler', desc: 'A dedicated concierge is assigned to your suite, offering round-the-clock tailored assistance.', icon: Clock },
+              { title: 'Vanguard Lounges', desc: 'Gain access to premium champagne and cigar lounges at all major transit terminals.', icon: Map }
+            ].map((amenity, idx) => (
+              <div key={idx} className="glass-panel p-8 rounded-3xl glow-border-gold space-y-6 hover:scale-[1.01] transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+                  <amenity.icon size={22} />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-xl font-bold text-white">{amenity.title}</h4>
+                  <p className="text-gray-400 text-sm font-light leading-relaxed">{amenity.desc}</p>
+                </div>
+                {/* Interactivity slot */}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
