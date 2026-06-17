@@ -590,6 +590,58 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ Accordion Section */}
+      <section className="relative py-24 px-4 md:px-8 lg:px-16 bg-gray-900">
+        <div className="max-w-4xl mx-auto space-y-16">
+          {/* Header */}
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur w-fit mx-auto">
+              <HelpCircle size={14} className="text-accent" />
+              <span className="text-[10px] font-bold tracking-widest text-accent uppercase">Frequent Inquiries</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+              Bespoke Booking <span className="text-gold-gradient">Clarifications</span>
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              { q: "How do I secure an Elite Club Membership?", a: "Membership is currently invitation-only for frequent flyers and premium train suite ticket holders. You can request a review using our request membership form." },
+              { q: "What is the cancellation protocol for private charters?", a: "Cancellations made 48 hours prior to departures receive 100% credit or refund options. Cancellations inside 24 hours are subject to a 10% operational fee." },
+              { q: "Are pets permitted in luxury train suites?", a: "Yes, Maharaja presidential suites feature premium pet-friendly compartments and custom dining recipes for your companion. Advanced booking is required." }
+            ].map((faq, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div key={idx} className="glass-panel rounded-2xl overflow-hidden border border-white/5">
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    className="w-full p-6 text-left flex justify-between items-center gap-4 cursor-pointer focus:outline-none hover:bg-white/5 transition-colors bg-transparent border-none"
+                  >
+                    <span className="text-base font-bold text-white">{faq.q}</span>
+                    <ChevronDown size={18} className={`text-accent transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="px-6 pb-6 text-sm text-gray-400 font-light leading-relaxed border-t border-white/5 pt-4">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
       {/* Amenities Detail Modal */}
       <AnimatePresence>
         {selectedAmenity && (
