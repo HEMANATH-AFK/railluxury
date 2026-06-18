@@ -124,9 +124,23 @@ const AdminLanding = () => {
           </div>
         </div>
 
-        {/* Right Side Credentials Card (Implemented in next commits) */}
+        {/* Right Side Credentials Card */}
         <div className="w-full lg:w-96 flex justify-center">
-          <div id="credentials-placeholder"></div>
+          <div className="glass-panel-dark glow-border-admin rounded-[32px] p-8 w-full shadow-2xl relative">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-[30px] rounded-full"></div>
+            
+            <div className="text-center mb-8">
+              <h3 className="text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">
+                GATEWAY CONTROL
+              </h3>
+              <p className="text-[10px] text-gray-500 font-mono tracking-widest uppercase mt-1">ADMINISTRATIVE HANDSHAKE</p>
+            </div>
+
+            <form className="space-y-6">
+              {/* Inputs and buttons will be added in subsequent commits */}
+              <div id="inputs-placeholder"></div>
+            </form>
+          </div>
         </div>
       </main>
 
