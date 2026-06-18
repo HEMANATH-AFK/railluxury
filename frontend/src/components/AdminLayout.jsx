@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
   LayoutDashboard, 
@@ -23,18 +23,7 @@ const AdminLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   if (!user || user.role !== 'admin') {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <div className="card-premium max-w-md text-center space-y-6">
-          <div className="w-20 h-20 bg-red-50 text-secondary rounded-full flex items-center justify-center mx-auto">
-            <LogOut size={40} />
-          </div>
-          <h2 className="text-primary italic">Access Restricted</h2>
-          <p className="text-gray-500 font-medium leading-relaxed">This command center is reserved for executive personnel only. Please verify your credentials.</p>
-          <button onClick={() => navigate('/')} className="btn-primary w-full">RETURN TO HOME</button>
-        </div>
-      </div>
-    );
+    return <Navigate to="/admin/login" replace />;
   }
 
   const menuItems = [
