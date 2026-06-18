@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ShieldAlert, ChevronLeft, Train } from 'lucide-react';
 
 const AdminLanding = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [logs, setLogs] = useState([
     'SYSTEM INIT: Handshake protocol active...',
     'CONNECTING: Datastore core node initialized.',
@@ -144,6 +146,8 @@ const AdminLanding = () => {
                     type="email" 
                     className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all font-mono" 
                     placeholder="admin@railluxury.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                 </div>
@@ -154,6 +158,8 @@ const AdminLanding = () => {
                     type="password" 
                     className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all font-mono" 
                     placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                   />
                 </div>
