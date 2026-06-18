@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 const AdminLanding = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const { user, login, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -16,6 +17,7 @@ const AdminLanding = () => {
       toast.error('Please fill in all security fields.');
       return;
     }
+    setLoading(true);
     try {
       await login(email, password);
       const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -27,6 +29,8 @@ const AdminLanding = () => {
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Handshake failed: Invalid credentials');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -195,8 +199,19 @@ const AdminLanding = () => {
                 </div>
               </div>
 
-              <button type="submit" className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs tracking-widest py-4 rounded-2xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer">
-                REQUEST ACCESS
+              <button 
+                type="submit" 
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:from-amber-800 disabled:to-slate-900 disabled:text-white/40 disabled:cursor-not-allowed text-slate-950 font-black text-xs tracking-widest py-4 rounded-2xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
+                    VERIFYING AUTH...
+                  </>
+                ) : (
+                  'REQUEST ACCESS'
+                )}
               </button>
             </form>
           </div>
