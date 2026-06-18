@@ -214,6 +214,14 @@ const AdminLanding = () => {
                 )}
               </button>
             </form>
+
+            <div className="mt-6 pt-6 border-t border-white/5 text-center">
+              <span className="text-[9px] font-mono text-amber-500/60 uppercase tracking-widest block mb-2">DEVELOPER SYSTEM HANDSHAKE</span>
+              <p className="text-[10px] text-gray-500 font-mono leading-relaxed">
+                Terminal ID: <code className="text-amber-500/90 bg-white/5 px-1.5 py-0.5 rounded font-mono">admin@ticketer.com</code> <br />
+                Passkey ID: <code className="text-amber-500/90 bg-white/5 px-1.5 py-0.5 rounded font-mono">adminpassword123</code>
+              </p>
+            </div>
           </div>
         </div>
       </main>
