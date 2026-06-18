@@ -137,8 +137,31 @@ const AdminLanding = () => {
             </div>
 
             <form className="space-y-6">
-              {/* Inputs and buttons will be added in subsequent commits */}
-              <div id="inputs-placeholder"></div>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Terminal Email</label>
+                  <input 
+                    type="email" 
+                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all font-mono" 
+                    placeholder="admin@railluxury.com"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Access Passkey</label>
+                  <input 
+                    type="password" 
+                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all font-mono" 
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+              </div>
+
+              <button type="submit" className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs tracking-widest py-4 rounded-2xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer">
+                REQUEST ACCESS
+              </button>
             </form>
           </div>
         </div>
