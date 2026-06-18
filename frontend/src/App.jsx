@@ -7,6 +7,7 @@ import Booking from './pages/Booking';
 import Payment from './pages/Payment';
 import Dashboard from './pages/Dashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminLanding from './pages/AdminLanding';
 import AdminUserList from './pages/AdminUserList';
 import AdminTransports from './pages/AdminTransports';
 import AdminBookings from './pages/AdminBookings';
@@ -34,6 +35,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/login" element={<AdminLanding />} />
             <Route path="/admin/users" element={<AdminUserList />} />
             <Route path="/admin/transports" element={<AdminTransports />} />
             <Route path="/admin/bookings" element={<AdminBookings />} />
