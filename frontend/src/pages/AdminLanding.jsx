@@ -4,6 +4,17 @@ import { ShieldAlert, ChevronLeft, Train } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
+/**
+ * AdminLanding Component
+ * 
+ * Renders the dedicated administrative landing portal for RailLuxury Systems.
+ * Features:
+ * - Standalone premium dark-cyber theme isolated from public header/footer layout.
+ * - Simulated live terminal logs for system diagnostics.
+ * - Active telemetry metrics dashboard (latency, database, node status).
+ * - Secure credentials gateway form connected to AuthContext API authentication.
+ * - Automated routing guard to redirect logged-in administrators straight to `/admin`.
+ */
 const AdminLanding = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
