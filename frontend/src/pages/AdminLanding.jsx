@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShieldAlert, ChevronLeft, Train } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const AdminLanding = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { user, login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   const [logs, setLogs] = useState([
     'SYSTEM INIT: Handshake protocol active...',
     'CONNECTING: Datastore core node initialized.',
@@ -138,7 +150,7 @@ const AdminLanding = () => {
               <p className="text-[10px] text-gray-500 font-mono tracking-widest uppercase mt-1">ADMINISTRATIVE HANDSHAKE</p>
             </div>
 
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Terminal Email</label>
