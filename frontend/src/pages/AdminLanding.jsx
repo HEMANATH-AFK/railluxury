@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldAlert, ChevronLeft, Train } from 'lucide-react';
 
 const AdminLanding = () => {
+  const [logs, setLogs] = useState([
+    'SYSTEM INIT: Handshake protocol active...',
+    'CONNECTING: Datastore core node initialized.',
+    'SECURE SHIELD: AES-256 validation ready.',
+  ]);
+
+  useEffect(() => {
+    const extraLogs = [
+      'HEALTH CHECK: API endpoint responding within 12ms.',
+      'AUDIT LOG: Listening for admin authentication token...',
+      'FIREWALL: External traffic filtered successfully.',
+      'SYNC: Transport fleet telemetry connection established.',
+      'MONITOR: Thread pool size optimized (max 200).',
+      'SECURE: SSH tunnel verified with local network node.',
+      'SYSTEM: Cache layer populated (98.6% hit rate).'
+    ];
+    let index = 0;
+    const interval = setInterval(() => {
+      setLogs((prev) => [...prev, extraLogs[index % extraLogs.length]].slice(-5));
+      index++;
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-admin-portal admin-grid text-white relative flex flex-col justify-between overflow-hidden">
       {/* Scanline Animation */}
@@ -47,8 +71,22 @@ const AdminLanding = () => {
             </p>
           </div>
 
-          {/* Placeholders for Terminal & Stats (Implemented in next commits) */}
-          <div id="terminal-placeholder"></div>
+          {/* Terminal Diagnostics */}
+          <div className="w-full max-w-lg rounded-2xl border border-white/5 bg-slate-950/70 p-5 font-mono text-[11px] text-amber-500/80 shadow-2xl relative">
+            <div className="flex justify-between items-center pb-3 border-b border-white/5 mb-3 text-[9px] text-gray-500 uppercase font-black tracking-widest">
+              <span>SYSTEM DIAGNOSTICS LOG</span>
+              <span className="flex items-center gap-1.5 font-bold"><span className="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span> LIVE SYNC</span>
+            </div>
+            <div className="space-y-2 h-32 overflow-y-auto luxury-scrollbar">
+              {logs.map((log, i) => (
+                <div key={i} className="flex gap-2 leading-relaxed">
+                  <span className="text-gray-600 font-bold">[SYS-LNK]</span>
+                  <span className={log.includes('SECURE') || log.includes('INIT') ? 'text-emerald-400 font-bold' : 'text-gray-300'}>{log}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div id="stats-placeholder"></div>
         </div>
 
