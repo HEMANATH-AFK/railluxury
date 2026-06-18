@@ -46,7 +46,7 @@ const MainLayout = ({ children }) => {
                 </Link>
               ))}
               {user?.role === 'admin' && (
-                <Link to="/admin" className="text-xs font-black uppercase tracking-widest text-secondary hover:text-red-700 transition-colors">
+                <Link to="/admin" className="text-xs font-black uppercase tracking-widest text-amber-500 hover:text-amber-600 hover:underline decoration-amber-500/50 underline-offset-4 transition-all">
                   Control Center
                 </Link>
               )}
