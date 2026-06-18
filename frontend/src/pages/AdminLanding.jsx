@@ -2,19 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShieldAlert, ChevronLeft, Train } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const AdminLanding = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { user, login } = useAuth();
+  const { user, login, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      toast.error('Please fill in all security fields.');
+      return;
+    }
     try {
       await login(email, password);
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      if (userInfo && userInfo.role === 'admin') {
+        toast.success('Handshake Successful. Welcome to control room.');
+      } else {
+        logout();
+        toast.error('Access Denied: Non-administrative account.');
+      }
     } catch (err) {
-      console.error(err);
+      toast.error(err.response?.data?.message || 'Handshake failed: Invalid credentials');
     }
   };
 
