@@ -17,6 +17,12 @@ const AdminLanding = () => {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      navigate('/admin');
+    }
+  }, [user, navigate]);
   const [logs, setLogs] = useState([
     'SYSTEM INIT: Handshake protocol active...',
     'CONNECTING: Datastore core node initialized.',
