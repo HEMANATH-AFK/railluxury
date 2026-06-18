@@ -124,7 +124,7 @@ const AdminLanding = () => {
           </div>
 
           {/* System Metrics Panel */}
-          <div className="grid grid-cols-3 gap-4 max-w-lg w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg w-full">
             <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between h-24">
               <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">API LATENCY</span>
               <div className="flex items-baseline gap-1 mt-2">
