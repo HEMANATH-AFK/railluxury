@@ -87,7 +87,41 @@ const AdminLanding = () => {
             </div>
           </div>
 
-          <div id="stats-placeholder"></div>
+          {/* System Metrics Panel */}
+          <div className="grid grid-cols-3 gap-4 max-w-lg w-full">
+            <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between h-24">
+              <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">API LATENCY</span>
+              <div className="flex items-baseline gap-1 mt-2">
+                <span className="text-lg font-bold tracking-tight text-emerald-400">12</span>
+                <span className="text-[10px] text-gray-500 font-mono">ms</span>
+              </div>
+              <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden mt-2">
+                <div className="bg-emerald-400 h-full rounded-full" style={{ width: '25%' }}></div>
+              </div>
+            </div>
+
+            <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between h-24">
+              <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">DATABASE POOL</span>
+              <div className="flex items-baseline gap-1 mt-2">
+                <span className="text-lg font-bold tracking-tight text-amber-400">98.4</span>
+                <span className="text-[10px] text-gray-500 font-mono">%</span>
+              </div>
+              <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden mt-2">
+                <div className="bg-amber-400 h-full rounded-full" style={{ width: '98%' }}></div>
+              </div>
+            </div>
+
+            <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between h-24">
+              <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">ACTIVE NODES</span>
+              <div className="flex items-baseline gap-1 mt-2">
+                <span className="text-lg font-bold tracking-tight text-blue-400">04</span>
+                <span className="text-[10px] text-gray-500 font-mono">/ 04</span>
+              </div>
+              <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden mt-2">
+                <div className="bg-blue-400 h-full rounded-full" style={{ width: '100%' }}></div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right Side Credentials Card (Implemented in next commits) */}
