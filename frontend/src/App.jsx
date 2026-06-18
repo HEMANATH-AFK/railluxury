@@ -24,27 +24,28 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <MainLayout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/select-class/:id" element={<ClassSelection />} />
-            <Route path="/book/:id" element={<Booking />} />
-            <Route path="/payment/:id" element={<Payment />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-            <Route path="/admin/login" element={<AdminLanding />} />
-            <Route path="/admin/users" element={<AdminUserList />} />
-            <Route path="/admin/transports" element={<AdminTransports />} />
-            <Route path="/admin/bookings" element={<AdminBookings />} />
-            <Route path="/admin/payments" element={<AdminPayments />} />
-            <Route path="/admin/tracking" element={<AdminTracking />} />
-            <Route path="/admin/notifications" element={<AdminNotifications />} />
-            <Route path="/admin/settings" element={<AdminSettings />} />
-          </Routes>
-        </MainLayout>
+        <Routes>
+          {/* Standard Public Routes */}
+          <Route path="/" element={<MainLayout><Home /></MainLayout>} />
+          <Route path="/search" element={<MainLayout><Search /></MainLayout>} />
+          <Route path="/select-class/:id" element={<MainLayout><ClassSelection /></MainLayout>} />
+          <Route path="/book/:id" element={<MainLayout><Booking /></MainLayout>} />
+          <Route path="/payment/:id" element={<MainLayout><Payment /></MainLayout>} />
+          <Route path="/dashboard" element={<MainLayout><Dashboard /></MainLayout>} />
+          <Route path="/login" element={<MainLayout><Login /></MainLayout>} />
+          <Route path="/register" element={<MainLayout><Register /></MainLayout>} />
+
+          {/* Dedicated Admin Panel Routes (No MainLayout wrapper) */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/login" element={<AdminLanding />} />
+          <Route path="/admin/users" element={<AdminUserList />} />
+          <Route path="/admin/transports" element={<AdminTransports />} />
+          <Route path="/admin/bookings" element={<AdminBookings />} />
+          <Route path="/admin/payments" element={<AdminPayments />} />
+          <Route path="/admin/tracking" element={<AdminTracking />} />
+          <Route path="/admin/notifications" element={<AdminNotifications />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
+        </Routes>
         <Toaster position="top-right" />
       </Router>
     </AuthProvider>
