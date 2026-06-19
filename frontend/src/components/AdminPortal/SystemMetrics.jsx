@@ -2,6 +2,14 @@ import React from 'react';
 import { Cpu, Database, HardDrive } from 'lucide-react';
 
 const SystemMetrics = () => {
+  const [cpuHistory, setCpuHistory] = React.useState([20, 25, 30, 22, 28, 35, 18, 24, 29, 31, 26, 23]);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCpuHistory((prev) => [...prev.slice(1), Math.floor(Math.random() * 30) + 15]);
+    }, 1500);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div className="glass-panel-dark glow-border-admin rounded-[32px] p-6 shadow-2xl space-y-6">
       <div className="flex justify-between items-center pb-4 border-b border-white/5">
@@ -19,13 +27,19 @@ const SystemMetrics = () => {
             <span className="text-xs text-amber-500 font-bold font-mono">4 Cores</span>
           </div>
           <div className="my-2">
-            {/* Sparkline placeholder for next commit */}
-            <div className="h-12 bg-white/5 rounded-lg flex items-end overflow-hidden p-1 gap-0.5" id="cpu-sparkline">
-              <span className="text-[10px] text-gray-600 w-full text-center py-2 font-mono">AWAITING CORRELATION</span>
+            <div className="h-12 bg-slate-900/60 rounded-xl flex items-end overflow-hidden p-2 gap-1 border border-white/5 justify-between">
+              {cpuHistory.map((val, idx) => (
+                <div 
+                  key={idx} 
+                  className="bg-amber-500/80 rounded-t w-full transition-all duration-300 hover:bg-amber-400 cursor-pointer" 
+                  style={{ height: `${val}%` }}
+                  title={`Core Load: ${val}%`}
+                ></div>
+              ))}
             </div>
           </div>
           <div className="flex justify-between text-[10px] text-gray-400 font-mono">
-            <span>AVG: 24.5%</span>
+            <span>AVG: {(cpuHistory.reduce((a, b) => a + b, 0) / cpuHistory.length).toFixed(1)}%</span>
             <span>TEMP: 42°C</span>
           </div>
         </div>
