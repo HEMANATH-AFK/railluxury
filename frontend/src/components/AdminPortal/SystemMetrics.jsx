@@ -3,11 +3,22 @@ import { Cpu, Database, HardDrive } from 'lucide-react';
 
 const SystemMetrics = () => {
   const [cpuHistory, setCpuHistory] = React.useState([20, 25, 30, 22, 28, 35, 18, 24, 29, 31, 26, 23]);
+  const [memoryUsage, setMemoryUsage] = React.useState(1.24);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCpuHistory((prev) => [...prev.slice(1), Math.floor(Math.random() * 30) + 15]);
     }, 1500);
+    return () => clearInterval(interval);
+  }, []);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setMemoryUsage((prev) => {
+        const diff = (Math.random() * 0.1 - 0.05);
+        return parseFloat((Math.max(1.1, Math.min(2.5, prev + diff))).toFixed(2));
+      });
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
   return (
@@ -48,13 +59,13 @@ const SystemMetrics = () => {
         <div className="bg-slate-950/40 p-4 rounded-2xl border border-white/5 flex flex-col justify-between min-h-[140px]">
           <div className="flex justify-between items-start">
             <span className="text-[10px] font-black text-gray-500 tracking-wider uppercase font-mono">MEM LOAD</span>
-            <span className="text-xs text-amber-500 font-bold font-mono">1.2 GB / 8.0 GB</span>
+            <span className="text-xs text-amber-500 font-bold font-mono">{memoryUsage.toFixed(2)} GB / 8.0 GB</span>
           </div>
           <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden mt-4">
-            <div className="bg-amber-500 h-full rounded-full transition-all duration-500" style={{ width: '15%' }}></div>
+            <div className="bg-amber-500 h-full rounded-full transition-all duration-500" style={{ width: `${(memoryUsage / 8.0) * 100}%` }}></div>
           </div>
           <div className="flex justify-between text-[10px] text-gray-400 font-mono mt-4">
-            <span>ACTIVE: 15.0%</span>
+            <span>ACTIVE: {((memoryUsage / 8.0) * 100).toFixed(1)}%</span>
             <span>SWAP: 0.1%</span>
           </div>
         </div>
