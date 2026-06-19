@@ -1,9 +1,50 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const AccessHandshake = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [pin, setPin] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  
+  const { user, login, logout } = useAuth();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (user && user.role === 'admin') {
+      navigate('/admin');
+    }
+  }, [user, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      toast.error('Please fill in credentials.');
+      return;
+    }
+    if (pin.length < 4) {
+      toast.error('Multi-factor PIN handshake incomplete (4 digits required).');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      await login(email, password);
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      if (userInfo && userInfo.role === 'admin') {
+        toast.success('Handshake Verified. Welcome to the Bridge.');
+      } else {
+        logout();
+        toast.error('Access Denied: Account lacks executive credentials.');
+      }
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Handshake failed: Credentials mismatch.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="glass-panel-dark glow-border-admin rounded-[32px] p-8 w-full shadow-2xl relative">
@@ -16,7 +57,7 @@ const AccessHandshake = () => {
         <p className="text-[10px] text-gray-500 font-mono tracking-widest uppercase mt-1">ADMINISTRATIVE HANDSHAKE</p>
       </div>
 
-      <form className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-4">
           <div className="space-y-2">
             <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1 font-mono">Terminal Email</label>
@@ -90,8 +131,21 @@ const AccessHandshake = () => {
           </div>
         </div>
 
-        {/* Access validation button and developer tooltips will be added in next commits */}
-        <div id="handshake-submit-placeholder"></div>
+        {/* Access validation button */}
+        <button 
+          type="submit" 
+          disabled={loading}
+          className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:from-amber-800 disabled:to-slate-900 disabled:text-white/40 disabled:cursor-not-allowed text-slate-950 font-black text-xs tracking-widest py-4 rounded-2xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2 font-mono"
+        >
+          {loading ? (
+            <>
+              <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
+              VERIFYING CORE...
+            </>
+          ) : (
+            'AUTHENTICATE ACCESS'
+          )}
+        </button>
       </form>
     </div>
   );
