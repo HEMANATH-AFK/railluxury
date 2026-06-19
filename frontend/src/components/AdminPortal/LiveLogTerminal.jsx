@@ -10,6 +10,8 @@ const LiveLogTerminal = () => {
     'CORE: RailLuxury operations monitor is listening...',
   ]);
   const [cmdText, setCmdText] = React.useState('');
+  const [history, setHistory] = React.useState([]);
+  const [historyIdx, setHistoryIdx] = React.useState(-1);
   const logEndRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -22,6 +24,8 @@ const LiveLogTerminal = () => {
 
     const typedCmd = cmdText.trim();
     setLogs((prev) => [...prev, `cmd: ${typedCmd}`]);
+    setHistory((prev) => [...prev, typedCmd]);
+    setHistoryIdx(-1);
 
     const cleanCmd = typedCmd.toLowerCase();
     
@@ -61,6 +65,28 @@ const LiveLogTerminal = () => {
     setCmdText('');
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (history.length === 0) return;
+      const nextIdx = historyIdx + 1;
+      if (nextIdx < history.length) {
+        setHistoryIdx(nextIdx);
+        setCmdText(history[history.length - 1 - nextIdx]);
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIdx = historyIdx - 1;
+      if (nextIdx >= 0) {
+        setHistoryIdx(nextIdx);
+        setCmdText(history[history.length - 1 - nextIdx]);
+      } else {
+        setHistoryIdx(-1);
+        setCmdText('');
+      }
+    }
+  };
+
   return (
     <div className="glass-panel-dark glow-border-admin rounded-[32px] p-6 shadow-2xl space-y-4 flex flex-col h-[320px]">
       <div className="flex justify-between items-center pb-3 border-b border-white/5 shrink-0">
@@ -97,6 +123,7 @@ const LiveLogTerminal = () => {
           type="text" 
           value={cmdText}
           onChange={(e) => setCmdText(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Type console command (e.g. /help)..."
           className="flex-1 bg-transparent text-white outline-none border-none placeholder-gray-600 font-mono text-xs"
         />
