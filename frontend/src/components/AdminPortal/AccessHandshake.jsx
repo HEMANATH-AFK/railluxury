@@ -128,6 +128,15 @@ const AccessHandshake = () => {
                 PINPAD
               </div>
             </div>
+
+            <div className="flex justify-between items-center text-[9px] font-mono mt-2">
+              <span className="text-gray-500">MFA STATUS:</span>
+              {pin.length === 4 ? (
+                <span className="text-emerald-400 font-bold tracking-wider animate-pulse">SECURE LINK READY</span>
+              ) : (
+                <span className="text-amber-500/70 font-bold tracking-wider">{4 - pin.length} DIGITS REMAINING</span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -146,6 +155,16 @@ const AccessHandshake = () => {
             'AUTHENTICATE ACCESS'
           )}
         </button>
+
+        {/* Developer credentials tooltips */}
+        <div className="mt-4 pt-4 border-t border-white/5 text-center">
+          <span className="text-[9px] font-mono text-amber-500/60 uppercase tracking-widest block mb-1">DEVELOPER BYPASS KEY</span>
+          <p className="text-[9px] text-gray-500 font-mono leading-relaxed">
+            ID: <code className="text-amber-500 bg-white/5 px-1.5 py-0.5 rounded font-mono">admin@ticketer.com</code> |
+            Key: <code className="text-amber-500 bg-white/5 px-1.5 py-0.5 rounded font-mono">adminpassword123</code> <br />
+            PIN Node: <code className="text-amber-500 bg-white/5 px-1.5 py-0.5 rounded font-mono">1234</code>
+          </p>
+        </div>
       </form>
     </div>
   );
