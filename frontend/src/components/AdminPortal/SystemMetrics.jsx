@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, Database, HardDrive } from 'lucide-react';
+import { Cpu, Database } from 'lucide-react';
 
 const SystemMetrics = () => {
   const [cpuHistory, setCpuHistory] = React.useState([20, 25, 30, 22, 28, 35, 18, 24, 29, 31, 26, 23]);
