@@ -1,245 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ShieldAlert, ChevronLeft, Train } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import toast from 'react-hot-toast';
+import React from 'react';
+import PortalHeader from '../components/AdminPortal/PortalHeader';
+import SystemMetrics from '../components/AdminPortal/SystemMetrics';
+import ServiceControlGrid from '../components/AdminPortal/ServiceControlGrid';
+import LiveLogTerminal from '../components/AdminPortal/LiveLogTerminal';
+import AccessHandshake from '../components/AdminPortal/AccessHandshake';
+import SecurityAlertBanner from '../components/AdminPortal/SecurityAlertBanner';
+import { ShieldAlert } from 'lucide-react';
 
-/**
- * AdminLanding Component
- * 
- * Renders the dedicated administrative landing portal for RailLuxury Systems.
- * Features:
- * - Standalone premium dark-cyber theme isolated from public header/footer layout.
- * - Simulated live terminal logs for system diagnostics.
- * - Active telemetry metrics dashboard (latency, database, node status).
- * - Secure credentials gateway form connected to AuthContext API authentication.
- * - Automated routing guard to redirect logged-in administrators straight to `/admin`.
- */
 const AdminLanding = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const { user, login, logout } = useAuth();
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email || !password) {
-      toast.error('Please fill in all security fields.');
-      return;
-    }
-    setLoading(true);
-    try {
-      await login(email, password);
-      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-      if (userInfo && userInfo.role === 'admin') {
-        toast.success('Handshake Successful. Welcome to control room.');
-      } else {
-        logout();
-        toast.error('Access Denied: Non-administrative account.');
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Handshake failed: Invalid credentials');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (user && user.role === 'admin') {
-      navigate('/admin');
-    }
-  }, [user, navigate]);
-  const [logs, setLogs] = useState([
-    'SYSTEM INIT: Handshake protocol active...',
-    'CONNECTING: Datastore core node initialized.',
-    'SECURE SHIELD: AES-256 validation ready.',
-  ]);
-
-  useEffect(() => {
-    const extraLogs = [
-      'HEALTH CHECK: API endpoint responding within 12ms.',
-      'AUDIT LOG: Listening for admin authentication token...',
-      'FIREWALL: External traffic filtered successfully.',
-      'SYNC: Transport fleet telemetry connection established.',
-      'MONITOR: Thread pool size optimized (max 200).',
-      'SECURE: SSH tunnel verified with local network node.',
-      'SYSTEM: Cache layer populated (98.6% hit rate).'
-    ];
-    let index = 0;
-    const interval = setInterval(() => {
-      setLogs((prev) => [...prev, extraLogs[index % extraLogs.length]].slice(-5));
-      index++;
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-admin-portal admin-grid text-white relative flex flex-col justify-between overflow-hidden">
+    <div className="min-h-screen bg-admin-portal admin-grid text-white relative flex flex-col justify-between overflow-y-auto luxury-scrollbar">
       {/* Scanline Animation */}
       <div className="animate-scanline"></div>
 
-      {/* Top Header */}
-      <header className="relative z-10 border-b border-white/5 bg-slate-950/40 backdrop-blur-md px-8 py-6 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/20">
-            <Train size={22} className="stroke-[2.5]" />
-          </div>
-          <div>
-            <h1 className="text-lg font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 uppercase">
-              Rail<span className="italic">Luxury</span> Systems
-            </h1>
-            <p className="text-[10px] text-amber-500/80 font-mono tracking-[0.2em] uppercase">Executive Command Gateway</p>
-          </div>
-        </div>
+      {/* Top Header Banner */}
+      <PortalHeader />
 
-        <Link 
-          to="/" 
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-amber-500/50 transition-all"
-        >
-          <ChevronLeft size={14} className="text-amber-500" /> Return Home
-        </Link>
-      </header>
-
-      {/* Main Content Area */}
-      <main className="relative z-10 flex-grow max-w-7xl mx-auto w-full px-6 py-12 flex flex-col lg:flex-row items-center justify-between gap-12">
-        {/* Left Side Info Panel */}
-        <div className="w-full lg:w-1/2 space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-mono">
-            <ShieldAlert size={14} className="animate-pulse" /> SECURITY HANDSHAKE REQUIRED
+      {/* Main Grid Deck */}
+      <main className="relative z-10 flex-grow max-w-7xl mx-auto w-full px-6 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Hand Controls & Telemetry */}
+        <div className="lg:col-span-7 space-y-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-mono font-bold tracking-wider">
+            <ShieldAlert size={14} className="animate-pulse" /> COMMAND PORTAL SIGN-IN REQUIRED
           </div>
-          <div className="space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+          
+          <div className="space-y-3">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight leading-tight uppercase font-mono">
               Administrative <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 glow-text-gold font-serif italic">Portal Gateway</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 glow-text-gold font-serif italic text-4xl">Control Console</span>
             </h2>
-            <p className="text-gray-400 max-w-lg text-sm font-medium leading-relaxed">
-              Welcome to the RailLuxury secure operations dashboard. Access here is strictly limited to authorized personnel with executive level clearance. Authorization audits are active.
+            <p className="text-gray-400 max-w-xl text-[11px] font-mono leading-relaxed">
+              OPERATIONAL HANDSHAKE INTEGRITY ENFORCED. ACCESS RESTRICTED TO PERSONNEL CLASSIFIED UNDER EXECUTIVE DECREE. ALL INGRESS HANDSHAKES AUDITED SECURELY.
             </p>
           </div>
 
-          {/* Terminal Diagnostics */}
-          <div className="w-full max-w-lg rounded-2xl border border-white/5 bg-slate-950/70 p-5 font-mono text-[11px] text-amber-500/80 shadow-2xl relative">
-            <div className="flex justify-between items-center pb-3 border-b border-white/5 mb-3 text-[9px] text-gray-500 uppercase font-black tracking-widest">
-              <span>SYSTEM DIAGNOSTICS LOG</span>
-              <span className="flex items-center gap-1.5 font-bold"><span className="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span> LIVE SYNC</span>
-            </div>
-            <div className="space-y-2 h-32 overflow-y-auto luxury-scrollbar">
-              {logs.map((log, i) => (
-                <div key={i} className="flex gap-2 leading-relaxed">
-                  <span className="text-gray-600 font-bold">[SYS-LNK]</span>
-                  <span className={log.includes('SECURE') || log.includes('INIT') ? 'text-emerald-400 font-bold' : 'text-gray-300'}>{log}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Telemetry Sparklines and Gauges */}
+          <SystemMetrics />
 
-          {/* System Metrics Panel */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg w-full">
-            <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between h-24">
-              <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">API LATENCY</span>
-              <div className="flex items-baseline gap-1 mt-2">
-                <span className="text-lg font-bold tracking-tight text-emerald-400">12</span>
-                <span className="text-[10px] text-gray-500 font-mono">ms</span>
-              </div>
-              <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden mt-2">
-                <div className="bg-emerald-400 h-full rounded-full" style={{ width: '25%' }}></div>
-              </div>
-            </div>
+          {/* Console switches overrides */}
+          <ServiceControlGrid />
 
-            <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between h-24">
-              <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">DATABASE POOL</span>
-              <div className="flex items-baseline gap-1 mt-2">
-                <span className="text-lg font-bold tracking-tight text-amber-400">98.4</span>
-                <span className="text-[10px] text-gray-500 font-mono">%</span>
-              </div>
-              <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden mt-2">
-                <div className="bg-amber-400 h-full rounded-full" style={{ width: '98%' }}></div>
-              </div>
-            </div>
-
-            <div className="bg-slate-950/40 border border-white/5 rounded-2xl p-4 flex flex-col justify-between h-24">
-              <span className="text-[9px] font-black text-gray-500 uppercase tracking-wider">ACTIVE NODES</span>
-              <div className="flex items-baseline gap-1 mt-2">
-                <span className="text-lg font-bold tracking-tight text-blue-400">04</span>
-                <span className="text-[10px] text-gray-500 font-mono">/ 04</span>
-              </div>
-              <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden mt-2">
-                <div className="bg-blue-400 h-full rounded-full" style={{ width: '100%' }}></div>
-              </div>
-            </div>
-          </div>
+          {/* Live scrolling logs terminal */}
+          <LiveLogTerminal />
         </div>
 
-        {/* Right Side Credentials Card */}
-        <div className="w-full lg:w-96 flex justify-center">
-          <div className="glass-panel-dark glow-border-admin rounded-[32px] p-8 w-full shadow-2xl relative">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 blur-[30px] rounded-full"></div>
-            
-            <div className="text-center mb-8">
-              <h3 className="text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">
-                GATEWAY CONTROL
-              </h3>
-              <p className="text-[10px] text-gray-500 font-mono tracking-widest uppercase mt-1">ADMINISTRATIVE HANDSHAKE</p>
-            </div>
+        {/* Right Hand Access Gate */}
+        <div className="lg:col-span-5 space-y-6 flex flex-col items-center lg:items-stretch">
+          {/* Credentials with keypad validation */}
+          <AccessHandshake />
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Terminal Email</label>
-                  <input 
-                    type="email" 
-                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all font-mono" 
-                    placeholder="admin@railluxury.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-500 uppercase tracking-widest ml-1">Access Passkey</label>
-                  <input 
-                    type="password" 
-                    className="w-full bg-slate-950/50 border border-white/5 rounded-2xl px-4 py-3.5 text-sm text-white placeholder-gray-600 outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all font-mono" 
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <button 
-                type="submit" 
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:from-amber-800 disabled:to-slate-900 disabled:text-white/40 disabled:cursor-not-allowed text-slate-950 font-black text-xs tracking-widest py-4 rounded-2xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2"
-              >
-                {loading ? (
-                  <>
-                    <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></span>
-                    VERIFYING AUTH...
-                  </>
-                ) : (
-                  'REQUEST ACCESS'
-                )}
-              </button>
-            </form>
-
-            <div className="mt-6 pt-6 border-t border-white/5 text-center">
-              <span className="text-[9px] font-mono text-amber-500/60 uppercase tracking-widest block mb-2">DEVELOPER SYSTEM HANDSHAKE</span>
-              <p className="text-[10px] text-gray-500 font-mono leading-relaxed">
-                Terminal ID: <code className="text-amber-500/90 bg-white/5 px-1.5 py-0.5 rounded font-mono">admin@ticketer.com</code> <br />
-                Passkey ID: <code className="text-amber-500/90 bg-white/5 px-1.5 py-0.5 rounded font-mono">adminpassword123</code>
-              </p>
-            </div>
-          </div>
+          {/* Threat Monitor alerts */}
+          <SecurityAlertBanner />
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 bg-slate-950/20 px-8 py-6 text-center text-[10px] text-gray-500 font-mono tracking-widest uppercase">
-        System Node: SG-102.RL.OPS | Latency: 12ms | Security Protocol: AES-256-GCM
+      {/* Control Footer */}
+      <footer className="relative z-10 border-t border-amber-500/10 bg-slate-950/20 px-8 py-5 text-center text-[9px] text-gray-500 font-mono tracking-widest uppercase">
+        Node: SG-102.RL.OPS | Shield Protocol: AES-256-GCM | Handshake Auth: OK
       </footer>
     </div>
   );
