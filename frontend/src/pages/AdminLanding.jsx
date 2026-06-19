@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import PortalHeader from '../components/AdminPortal/PortalHeader';
 import SystemMetrics from '../components/AdminPortal/SystemMetrics';
 import ServiceControlGrid from '../components/AdminPortal/ServiceControlGrid';
@@ -9,6 +11,14 @@ import { ShieldAlert } from 'lucide-react';
 
 const AdminLanding = () => {
   const [breach, setBreach] = React.useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (user && user.role === 'admin') {
+      navigate('/admin');
+    }
+  }, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-admin-portal admin-grid text-white relative flex flex-col justify-between overflow-y-auto luxury-scrollbar">
