@@ -9,6 +9,57 @@ const LiveLogTerminal = () => {
     'DB-CONN: Connection pool created (Size: 20).',
     'CORE: RailLuxury operations monitor is listening...',
   ]);
+  const [cmdText, setCmdText] = React.useState('');
+  const logEndRef = React.useRef(null);
+
+  React.useEffect(() => {
+    logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [logs]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!cmdText.trim()) return;
+
+    const typedCmd = cmdText.trim();
+    setLogs((prev) => [...prev, `cmd: ${typedCmd}`]);
+
+    const cleanCmd = typedCmd.toLowerCase();
+    
+    setTimeout(() => {
+      if (cleanCmd === '/clear') {
+        setLogs([]);
+      } else if (cleanCmd === '/help') {
+        setLogs((prev) => [
+          ...prev,
+          'SYSTEM: Available Gateway commands:',
+          '  /help    - List administrative options',
+          '  /status  - Query active database & node statuses',
+          '  /sysinfo - Display operational runtime info',
+          '  /clear   - Flush telemetry diagnostic buffer'
+        ]);
+      } else if (cleanCmd === '/status') {
+        setLogs((prev) => [
+          ...prev,
+          'STATUS: Core network handshake responding at 12ms.',
+          'STATUS: MongoDB instances reporting 100% telemetry availability.'
+        ]);
+      } else if (cleanCmd === '/sysinfo') {
+        setLogs((prev) => [
+          ...prev,
+          'SYS-INFO: RailLuxury Core operations shell [v1.0.4-LNK]',
+          'SYS-INFO: Running Node: SG-102.RL.OPS',
+          'SYS-INFO: Active Handshake encryption: AES-256-GCM'
+        ]);
+      } else {
+        setLogs((prev) => [
+          ...prev,
+          `ERR: Unrecognized command '${typedCmd}'. Type /help for commands.`
+        ]);
+      }
+    }, 150);
+
+    setCmdText('');
+  };
 
   return (
     <div className="glass-panel-dark glow-border-admin rounded-[32px] p-6 shadow-2xl space-y-4 flex flex-col h-[320px]">
@@ -16,7 +67,10 @@ const LiveLogTerminal = () => {
         <h3 className="text-sm font-black tracking-wider text-amber-400 uppercase font-mono flex items-center gap-2">
           <Terminal size={16} /> Console Diagnostics
         </h3>
-        <button className="p-1 hover:bg-white/5 rounded text-gray-500 hover:text-amber-500 transition-colors cursor-pointer">
+        <button 
+          onClick={() => setLogs((prev) => [...prev, 'SYSTEM: Diagnostic buffer refreshed.'])}
+          className="p-1 hover:bg-white/5 rounded text-gray-500 hover:text-amber-500 transition-colors cursor-pointer"
+        >
           <RefreshCw size={12} className="animate-spin-slow" />
         </button>
       </div>
@@ -25,16 +79,28 @@ const LiveLogTerminal = () => {
         {logs.map((log, idx) => (
           <div key={idx} className="flex gap-2">
             <span className="text-amber-500/50 select-none">rlx_shell#</span>
-            <span className={log.includes('SYSTEM') || log.includes('CONN') ? 'text-emerald-400 font-bold' : log.includes('SECURE') ? 'text-blue-400 font-bold' : ''}>{log}</span>
+            <span className={
+              log.includes('cmd: ') ? 'text-amber-400 font-bold' : 
+              log.includes('SYSTEM') || log.includes('CONN') || log.includes('STATUS') ? 'text-emerald-400 font-bold' : 
+              log.includes('SECURE') || log.includes('SYS-INFO') ? 'text-blue-400 font-bold' : 
+              log.includes('ERR:') ? 'text-red-400 font-bold' : ''
+            }>{log}</span>
           </div>
         ))}
+        <div ref={logEndRef} />
       </div>
 
-      {/* Terminal input prompt placeholder for next commit */}
-      <div className="shrink-0 flex items-center gap-2 font-mono text-xs bg-slate-950/40 px-4 py-3 border border-white/5 rounded-2xl" id="input-prompt">
+      {/* Terminal input prompt */}
+      <form onSubmit={handleSubmit} className="shrink-0 flex items-center gap-2 font-mono text-xs bg-slate-950/40 px-4 py-3 border border-white/5 rounded-2xl focus-within:border-amber-500/50 focus-within:ring-1 focus-within:ring-amber-500/50 transition-all">
         <span className="text-amber-500 font-bold select-none">$</span>
-        <span className="text-gray-600">SHELL READ-ONLY MODE</span>
-      </div>
+        <input 
+          type="text" 
+          value={cmdText}
+          onChange={(e) => setCmdText(e.target.value)}
+          placeholder="Type console command (e.g. /help)..."
+          className="flex-1 bg-transparent text-white outline-none border-none placeholder-gray-600 font-mono text-xs"
+        />
+      </form>
     </div>
   );
 };
