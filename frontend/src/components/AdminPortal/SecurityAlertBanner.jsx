@@ -1,8 +1,7 @@
 import React from 'react';
 import { ShieldCheck, ShieldAlert, AlertTriangle } from 'lucide-react';
 
-const SecurityAlertBanner = () => {
-  const [breach, setBreach] = React.useState(false);
+const SecurityAlertBanner = ({ breach, setBreach }) => {
 
   return (
     <div className={`glass-panel-dark rounded-[32px] p-6 shadow-2xl space-y-4 border transition-all duration-500 ${

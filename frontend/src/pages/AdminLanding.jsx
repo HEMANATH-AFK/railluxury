@@ -8,13 +8,15 @@ import SecurityAlertBanner from '../components/AdminPortal/SecurityAlertBanner';
 import { ShieldAlert } from 'lucide-react';
 
 const AdminLanding = () => {
+  const [breach, setBreach] = React.useState(false);
+
   return (
     <div className="min-h-screen bg-admin-portal admin-grid text-white relative flex flex-col justify-between overflow-y-auto luxury-scrollbar">
       {/* Scanline Animation */}
       <div className="animate-scanline"></div>
 
       {/* Top Header Banner */}
-      <PortalHeader />
+      <PortalHeader breach={breach} />
 
       {/* Main Grid Deck */}
       <main className="relative z-10 flex-grow max-w-7xl mx-auto w-full px-6 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -41,7 +43,7 @@ const AdminLanding = () => {
           <ServiceControlGrid />
 
           {/* Live scrolling logs terminal */}
-          <LiveLogTerminal />
+          <LiveLogTerminal breach={breach} />
         </div>
 
         {/* Right Hand Access Gate */}
@@ -50,7 +52,7 @@ const AdminLanding = () => {
           <AccessHandshake />
 
           {/* Threat Monitor alerts */}
-          <SecurityAlertBanner />
+          <SecurityAlertBanner breach={breach} setBreach={setBreach} />
         </div>
       </main>
 

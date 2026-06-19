@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Train, Home, Shield } from 'lucide-react';
 
-const PortalHeader = () => {
+const PortalHeader = ({ breach }) => {
   const [latency, setLatency] = React.useState(12);
 
   React.useEffect(() => {
@@ -28,9 +28,11 @@ const PortalHeader = () => {
       <div className="flex items-center gap-6">
         {/* Status Nodes */}
         <div className="hidden lg:flex items-center gap-4 text-xs font-mono text-gray-400">
-          <div className="flex items-center gap-2 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-white/5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>NODE: SG-102</span>
+          <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+            breach ? 'bg-red-500/10 border-red-500/30 text-red-400 animate-pulse' : 'bg-slate-900/60 border-white/5'
+          }`}>
+            <span className={`w-2 h-2 rounded-full ${breach ? 'bg-red-500' : 'bg-emerald-500'}`}></span>
+            <span>NODE: {breach ? 'COMPROMISED' : 'SG-102'}</span>
           </div>
           <div className="flex items-center gap-2 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-white/5">
             <span className="relative flex h-2 w-2">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Terminal, RefreshCw } from 'lucide-react';
 
-const LiveLogTerminal = () => {
+const LiveLogTerminal = ({ breach }) => {
   const [logs, setLogs] = React.useState([
     'SYSTEM: Handshake protocol loaded successfully.',
     'SECURE: Cipher suite set to ECDHE-RSA-AES256-GCM-SHA384.',
@@ -13,6 +13,14 @@ const LiveLogTerminal = () => {
   const [history, setHistory] = React.useState([]);
   const [historyIdx, setHistoryIdx] = React.useState(-1);
   const logEndRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (breach) {
+      setLogs((prev) => [...prev, 'ALERT: Critical threat protocol override simulation detected!'].slice(-6));
+    } else {
+      setLogs((prev) => [...prev, 'SYSTEM: Threat protocol override simulated resolved.'].slice(-6));
+    }
+  }, [breach]);
 
   React.useEffect(() => {
     logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
