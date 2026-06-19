@@ -45,7 +45,7 @@ const AdminLanding = () => {
         </div>
 
         {/* Right Hand Access Gate */}
-        <div className="lg:col-span-5 space-y-6 flex flex-col items-center lg:items-stretch">
+        <div className="lg:col-span-5 space-y-6 flex flex-col items-center lg:items-stretch w-full max-w-xl mx-auto lg:max-w-none">
           {/* Credentials with keypad validation */}
           <AccessHandshake />
 
